@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Basic Example with Click Counter</title>
+    <!--[if lt IE 9]>
+    <script src="../../build/html5shiv.js"></script>
+    <script src="../../build/es5-shim.js"></script>
+    <script src="../../build/es5-sham.js"></script>
+    <script src="../../build/console-polyfill.js"></script>
+    <![endif]-->
+    <script src="../../build/react.js"></script>
+    <script src="../../build/react-dom.js"></script>
+    <script src="../../build/jquery.js"></script>
+    <script src="../../build/browser.js"></script>
+  </head>
+  <body>
+    <div id="container" align="center"></div>
+    <script type="text/babel">
+      var FancyCheckbox = React.createClass({
+        componentDidMount:function(){
+        console.log("componentDidMount");
+          $("h1").on("click",function(){
+              console.log("you click h1")
+          })
+      },
+              getInitialState:function(){
+        console.log("getInitialState");
+              return { value:"ok"}
+          },
+        componentWillReceiveProps:function(){
+          console.log("componentWillReceiveProps");
+        },
+      componentDidUpdate:function( prevProps, prevState){
+        console.log("componentDidUpdate"+prevProps+"--"+prevState);
+      },
+        componentWillUnmount:function(){
+          console.log("componentWillUnmount");
+        },
+        componentWillMount:function(){
+          console.log("componentWillMount");
+        },
+        changeHandler:function(e){
+        e.preventDefault()
+
+          this.setState({value:$(e.target).val()})
+        },
+                clickHandler:function(){
+                  console.log("click text")
+                },
+                render: function() {
+                  return (
+
+
+
+                      <div>
+                          <h1>what you are searching  is {this.state.value}</h1>
+                          <form>
+                          <input type="text" refs="search" value={this.state.value} onChange={this.changeHandler} onClick={this.clickHandler}/>
+      <input type="radio" onChange={this.changeHandler} onClick={this.clickHandler}/>
+
+      </form>
+                                  </div>
+
+                  );
+                  }
+      });
+      ReactDOM.render(
+      <FancyCheckbox/> ,
+              document.getElementById('container')
+      );
+    </script>
+  </body>
+</html>
